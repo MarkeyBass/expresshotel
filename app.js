@@ -32,5 +32,7 @@ const httpSecureServer = https.createServer(credentials ,app);
 httpPORT = 5004;
 httpSecurePORT = 8004;
 
-httpServer.listen(5004);
-httpSecureServer.listen(8004, () => console.log(`server is running on port ${httpSecurePORT}`));
+httpServer.listen(httpPORT, (req, res) => {
+  const myUrl = url.pathname();
+});
+httpSecureServer.listen(httpSecurePORT, () => console.log(`server is running on port ${httpSecurePORT}`));
