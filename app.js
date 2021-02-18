@@ -28,11 +28,14 @@ app.use(express.static(path.join(__dirname,'public')));
 
 httpPORT = 5004;
 httpSecurePORT = 8004;
-const myUrl = url.parse();
+
 
 // httpApp is created only for redirection
 const httpApp = express();
-httpApp.all('*', (req, res) => res.redirect(301, `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}`));
+httpApp.all('*', (req, res) => {
+  const myUrl = url.parse();
+  res.redirect(301, `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}`)
+}); 
 
 const httpServer = http.createServer(httpApp);
 const httpSecureServer = https.createServer(credentials ,app);
