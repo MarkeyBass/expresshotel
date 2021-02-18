@@ -26,7 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname,'public')));
 
-// const httpServer = http.createServer(app);
+const httpServer = http.createServer(app);
+const httpSecureServer = https.createServer(credentials ,app);
 
 httpPORT = 5004;
 httpSecurePORT = 8004;
@@ -39,7 +40,6 @@ httpSecurePORT = 8004;
 //   res.end();
 // });
 
-const httpSecureServer = https.createServer(credentials ,app);
 
 httpServer.listen(httpPORT, () => console.log(`server is running on port ${httpPORT}`));
 httpSecureServer.listen(httpSecurePORT, () => console.log(`server is running on port ${httpSecurePORT}`));
