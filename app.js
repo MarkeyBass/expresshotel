@@ -34,7 +34,7 @@ httpSecurePORT = 8004;
 const httpApp = express();
 httpApp.all('*', (req, res) => {
   const myUrl = url.parse(req.url);
-  res.redirect(301, `https://markeybass.com:${httpSecurePORT}${url.pathname}`)
+  res.redirect(301, `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}`)
 }); 
 
 const httpServer = http.createServer(httpApp);
