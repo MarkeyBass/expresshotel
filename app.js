@@ -33,11 +33,11 @@ httpSecurePORT = 8004;
 
 
 
-const httpServer = http.createServer(httpPORT, (req, res) => {
-  const myUrl = url.parse();
-  res.writeHead(301, { location: `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}` })
-  res.end();
-});
+// const httpServer = http.createServer(httpPORT, (req, res) => {
+//   const myUrl = url.parse();
+//   res.writeHead(301, { location: `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}` })
+//   res.end();
+// });
 
 const httpSecureServer = https.createServer(credentials ,app);
 
