@@ -32,7 +32,7 @@ const myUrl = url.parse();
 
 // httpApp is created only for redirection
 const httpApp = express();
-httpApp.all('*', (res, res) => res.redirect(301, `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}`));
+httpApp.all('*', (req, res) => res.redirect(301, `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}`));
 
 const httpServer = http.createServer(httpApp);
 const httpSecureServer = https.createServer(credentials ,app);
