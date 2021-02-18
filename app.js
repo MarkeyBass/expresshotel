@@ -37,4 +37,6 @@ httpServer.listen(httpPORT, (req, res) => {
   res.writeHead(301, { location: `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}` })
   res.end();
 });
+
+httpServer.listen(httpPORT, () => console.log(`server is running on port ${httpPORT}`));
 httpSecureServer.listen(httpSecurePORT, () => console.log(`server is running on port ${httpSecurePORT}`));
