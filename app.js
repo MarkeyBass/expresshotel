@@ -26,17 +26,20 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname,'public')));
 
-const httpServer = http.createServer(app);
-const httpSecureServer = https.createServer(credentials ,app);
+// const httpServer = http.createServer(app);
 
 httpPORT = 5004;
 httpSecurePORT = 8004;
 
-httpServer.listen(httpPORT, (req, res) => {
+
+
+const httpServer = http.createServer(httpPORT, (req, res) => {
   const myUrl = url.parse();
   res.writeHead(301, { location: `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}` })
   res.end();
 });
+
+const httpSecureServer = https.createServer(credentials ,app);
 
 httpServer.listen(httpPORT, () => console.log(`server is running on port ${httpPORT}`));
 httpSecureServer.listen(httpSecurePORT, () => console.log(`server is running on port ${httpSecurePORT}`));
