@@ -7,8 +7,10 @@ const url = require('url');
 
 const express = require('express');
 const app = express();
+// httpApp is created only for redirection
+const httpApp = express();
 
-// REDIRECTION TO HTTPS
+// CREDENTIALS
 
 const cert = fs.readFileSync('/etc/letsencrypt/archive/markeybass.com/cert1.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/archive/markeybass.com/chain1.pem', 'utf-8');
@@ -26,27 +28,20 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname,'public')));
 
+// PORTS
 httpPORT = 5004;
 httpSecurePORT = 8004;
 
-
-// httpApp is created only for redirection
-const httpApp = express();
+// REDIRECTION
 httpApp.all('*', (req, res) => {
   const myUrl = url.parse(req.url);
   res.redirect(301, `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}`)
 }); 
 
+// Creating Servers
 const httpServer = http.createServer(httpApp);
 const httpSecureServer = https.createServer(credentials ,app);
 
-
-// const httpServer = http.createServer(httpPORT, (req, res) => {
-//   const myUrl = url.parse(req.url);
-//   res.writeHead(301, { location: `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}` })
-//   res.end();
-// });
-
-
+// Servers Listening
 httpServer.listen(httpPORT, () => console.log(`server is running on port ${httpPORT}`));
 httpSecureServer.listen(httpSecurePORT, () => console.log(`server is running on port ${httpSecurePORT}`));
