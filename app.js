@@ -33,7 +33,7 @@ httpSecurePORT = 8004;
 // httpApp is created only for redirection
 const httpApp = express();
 httpApp.all('*', (req, res) => {
-  // const myUrl = url.parse();
+  const myUrl = url.parse(req.url);
   res.redirect(301, `https://markeybass.com:${httpSecurePORT}${url.pathname}`)
 }); 
 
@@ -42,7 +42,7 @@ const httpSecureServer = https.createServer(credentials ,app);
 
 
 // const httpServer = http.createServer(httpPORT, (req, res) => {
-//   const myUrl = url.parse();
+//   const myUrl = url.parse(req.url);
 //   res.writeHead(301, { location: `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}` })
 //   res.end();
 // });
