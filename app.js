@@ -33,6 +33,8 @@ httpPORT = 5004;
 httpSecurePORT = 8004;
 
 httpServer.listen(httpPORT, (req, res) => {
-  const myUrl = url.pathname();
+  const myUrl = url.parse();
+  res.writeHead(301, { location: `https://markeybass.com:${httpSecurePORT}${myUrl.pathname}` })
+  res.end();
 });
 httpSecureServer.listen(httpSecurePORT, () => console.log(`server is running on port ${httpSecurePORT}`));
